@@ -1,0 +1,28 @@
+{
+  "name": "novaapi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev ./src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/css": "^0.11.1",
+    "@eslint/js": "^9.36.0",
+    "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.3.0",
+    "@types/express": "^5.0.3",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "jiti": "^2.6.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0"
+  }
+}
