@@ -1,9 +1,13 @@
-import { Router } from 'express';
+import { json, Router } from 'express';
+
+import {CidadeController} from './controllers';
 
 const router = Router();
 
-router.get('/teste', (req, res) => {
-  return res.send('Hello, World!');
+router.get('/', (req, res) => {
+  return res.send('Rostas funcionando!');
 });
+
+router.post('/cidades', CidadeController.create);
 
 export { router };
