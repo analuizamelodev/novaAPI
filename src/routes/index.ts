@@ -9,5 +9,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/cidades', CidadeController.create);
+router.get('/cidades', CidadeController.getAll);
 
 export { router };
