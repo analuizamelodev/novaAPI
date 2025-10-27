@@ -8,8 +8,8 @@ interface IQueryProps {
 }
 
 const cidadeSchema = z.object({
-  page: z.number().min(1, "A página deve ser no mínimo 1.").optional(),
-  limit: z.number().min(1, "O limite deve ser no mínimo 1.").max(100, "O limite deve ser no máximo 100.").optional(),
+  page: z.coerce.number().min(1, "A página deve ser no mínimo 1.").optional(),
+  limit: z.coerce.number().min(1, "O limite deve ser no mínimo 1.").max(100, "O limite deve ser no máximo 100.").optional(),
   filter: z.string().min(3, "O filtro deve ter pelo menos 3 caracteres.").max(50, "O filtro deve ter no máximo 50 caracteres.").optional(),
 });
 

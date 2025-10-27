@@ -1,7 +1,6 @@
 import { json, Router } from 'express';
 
-import {CidadeController} from './controllers';
-
+import * as CidadeController from './controllers/cidades';
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -10,5 +9,7 @@ router.get('/', (req, res) => {
 
 router.post('/cidades', CidadeController.create);
 router.get('/cidades', CidadeController.getAll);
-
+router.get('/cidades/:id', CidadeController.getById);
+router.put('/cidades/:id', CidadeController.updateById);
+router.delete('/cidades/:id', CidadeController.deleteById);
 export { router };
