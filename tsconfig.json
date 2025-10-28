@@ -9,5 +9,11 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tests"],
+  "exclude": [
+   "./node_modules",
+   "./jest.config.ts",
+   "../__tests__",
+   "./build"
+  ]
 }

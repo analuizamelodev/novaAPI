@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev ./src/index.ts"
+    "test": "jest",
+    "dev": "ts-node-dev ./src/index.ts",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit",
+    "build": "node ./node_modules/typescript/bin/tsc"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/jest": "^30.0.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "http-status-codes": "^2.3.0",
+    "ts-jest": "^29.4.5",
     "zod": "^4.1.12"
   },
   "devDependencies": {
@@ -21,9 +25,12 @@
     "@eslint/json": "^0.13.2",
     "@eslint/markdown": "^7.3.0",
     "@types/express": "^5.0.3",
+    "@types/supertest": "^6.0.3",
     "eslint": "^9.36.0",
     "globals": "^16.4.0",
+    "jest": "^30.2.0",
     "jiti": "^2.6.1",
+    "supertest": "^7.1.4",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.45.0"
