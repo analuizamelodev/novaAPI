@@ -7,7 +7,10 @@ interface Cidade {
 }
 
 const cidadeSchema = z.object({
-  cidade: z.string().min(3, "A Cidade deve ter pelo menos 3 caracteres.").max(50, "A cidade deve ter no máximo 50 caracteres."),
+  cidade: z
+    .string()
+    .min(3, "A Cidade deve ter pelo menos 3 caracteres.")
+    .max(50, "A cidade deve ter no máximo 50 caracteres."),
   estado: z.string().length(2, "O Estado deve ter exatamente 2 letras."),
 });
 

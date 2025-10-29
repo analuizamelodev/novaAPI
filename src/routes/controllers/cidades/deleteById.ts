@@ -9,7 +9,10 @@ const cidadeSchema = z.object({
   id: z.coerce.number().min(1, "O ID deve ser no mínimo 1."),
 });
 
-export const deleteById = (req: Request<{}, {}, IParamsProps>, res: Response) => {
+export const deleteById = (
+  req: Request<{}, {}, IParamsProps>,
+  res: Response
+) => {
   const result = cidadeSchema.safeParse(req.params);
 
   if (!result.success) {

@@ -12,11 +12,17 @@ interface IBodyProps {
 
 const cidadeSchema = z.object({
   id: z.coerce.number().min(1, "O ID deve ser no mínimo 1."),
-  cidade: z.string().min(3, "A Cidade deve ter pelo menos 3 caracteres.").max(50, "A cidade deve ter no máximo 50 caracteres."),
-  estado: z.string().length(2, "O Estado deve ter exatamente 2 letras."),        
+  cidade: z
+    .string()
+    .min(3, "A Cidade deve ter pelo menos 3 caracteres.")
+    .max(50, "A cidade deve ter no máximo 50 caracteres."),
+  estado: z.string().length(2, "O Estado deve ter exatamente 2 letras."),
 });
 
-export const updateById = (req: Request<IParamsProps, {}, IBodyProps>, res: Response) => {
+export const updateById = (
+  req: Request<IParamsProps, {}, IBodyProps>,
+  res: Response
+) => {
   const result = cidadeSchema.safeParse({
     ...req.params,
     ...req.body,
