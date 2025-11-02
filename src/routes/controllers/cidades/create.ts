@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import { z } from "zod";
+import { prisma } from "../../../server";
 
 interface Cidade {
-  cidade: string;
+  nome: string;
   estado: string;
 }
 
 const cidadeSchema = z.object({
-  cidade: z
+  nome: z
     .string()
     .min(3, "A Cidade deve ter pelo menos 3 caracteres.")
     .max(50, "A cidade deve ter no máximo 50 caracteres."),
@@ -27,7 +28,12 @@ export const create = (req: Request<{}, {}, Cidade>, res: Response) => {
       message: mensagens.length === 1 ? mensagens[0] : mensagens,
     });
   }
-
+  prisma.cidade.create({
+    data: {
+      nome: result.data.nome,
+      estado: result.data.estado,
+    },    
+ });
   return res.status(201).send({
     message: "Cidade e Estado criados com sucesso!",
   });

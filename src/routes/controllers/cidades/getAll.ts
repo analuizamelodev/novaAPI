@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
+import { prisma } from "../../../server";
 
 interface IQueryProps {
   page?: number;
@@ -21,7 +22,7 @@ const cidadeSchema = z.object({
     .optional(),
 });
 
-export const getAll = (req: Request<{}, {}, IQueryProps>, res: Response) => {
+export const getAll = async (req: Request<{}, {}, IQueryProps>, res: Response) => {
   const result = cidadeSchema.safeParse(req.query);
 
   if (!result.success) {
@@ -34,8 +35,12 @@ export const getAll = (req: Request<{}, {}, IQueryProps>, res: Response) => {
       message: mensagens.length === 1 ? mensagens[0] : mensagens,
     });
   }
+  const cidades = await prisma.cidade.findMany();
 
   return res.status(200).json({
     message: "Cidades e Estados encontrados com sucesso!",
+    data: {
+      cidades
+    },
   });
 };

@@ -4,14 +4,14 @@ describe("UpdateById /cidades", () => {
   it("Atualizar um registro de cidade por id", async () => {
     const resCriar = await testServer
       .post("/cidades")
-      .send({ cidade: "São Paulo", estado: "SP" });
+      .send({ nome: "São Paulo", estado: "SP" });
     expect(resCriar.status).toEqual(201);
 
     const idToUpdate = 1;
 
     const resAtualizar = await testServer
       .put(`/cidades/${idToUpdate}`)
-      .send({ cidade: "Rio de Janeiro", estado: "RJ" });
+      .send({ nome: "Rio de Janeiro", estado: "RJ" });
     expect(resAtualizar.status).toEqual(200);
   });
   it("Tentar atualizar um registro de cidade por id inválido", async () => {
@@ -19,7 +19,7 @@ describe("UpdateById /cidades", () => {
 
     const resAtualizar = await testServer
       .put(`/cidades/${idToUpdate}`)
-      .send({ cidade: "Rio de Janeiro", estado: "RJ" });
+      .send({ nome: "Rio de Janeiro", estado: "RJ" });
     expect(resAtualizar.status).toEqual(400);
   });
 });

@@ -4,3 +4,6 @@
 /dist
 /build
 /coverage
+
+
+/src/generated/prisma

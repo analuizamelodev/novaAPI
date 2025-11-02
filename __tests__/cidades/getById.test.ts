@@ -4,7 +4,7 @@ describe("GetById /cidades", () => {
   it("Buscar um registro de cidade por id", async () => {
     const resCriar = await testServer
       .post("/cidades")
-      .send({ cidade: "São Paulo", estado: "SP" });
+      .send({ nome: "São Paulo", estado: "SP" });
     expect(resCriar.status).toEqual(201);
 
     const idToGet = 1;

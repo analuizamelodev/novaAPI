@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
+import { prisma } from "../../../server";
 
 interface IParamsProps {
   id: number;
@@ -25,6 +26,11 @@ export const deleteById = (
       message: mensagens.length === 1 ? mensagens[0] : mensagens,
     });
   }
+   prisma.cidade.delete({
+    where: {
+      id: result.data.id,
+    },
+  });
 
   return res.status(200).json({
     message: "Cidade e Estado deletados com sucesso!",
