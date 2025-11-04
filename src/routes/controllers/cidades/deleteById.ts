@@ -10,7 +10,7 @@ const cidadeSchema = z.object({
   id: z.coerce.number().min(1, "O ID deve ser no mínimo 1."),
 });
 
-export const deleteById = (
+export const deleteById = async (
   req: Request<{}, {}, IParamsProps>,
   res: Response
 ) => {
@@ -26,7 +26,7 @@ export const deleteById = (
       message: mensagens.length === 1 ? mensagens[0] : mensagens,
     });
   }
-   prisma.cidade.delete({
+  await prisma.cidade.delete({
     where: {
       id: result.data.id,
     },

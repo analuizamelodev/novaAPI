@@ -10,7 +10,10 @@ const cidadeSchema = z.object({
   id: z.coerce.number().min(1, "O ID deve ser no mínimo 1."),
 });
 
-export const getById = async (req: Request<{}, {}, IParamsProps>, res: Response) => {
+export const getById = async (
+  req: Request<{}, {}, IParamsProps>,
+  res: Response
+) => {
   const result = cidadeSchema.safeParse(req.params);
 
   if (!result.success) {
@@ -32,7 +35,7 @@ export const getById = async (req: Request<{}, {}, IParamsProps>, res: Response)
   return res.status(200).json({
     message: "Cidade e Estado encontrados com sucesso!",
     data: {
-      cidade
+      cidade,
     },
   });
 };

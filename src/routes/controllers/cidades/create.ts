@@ -15,7 +15,7 @@ const cidadeSchema = z.object({
   estado: z.string().length(2, "O Estado deve ter exatamente 2 letras."),
 });
 
-export const create = (req: Request<{}, {}, Cidade>, res: Response) => {
+export const create = async (req: Request<{}, {}, Cidade>, res: Response) => {
   const result = cidadeSchema.safeParse(req.body);
 
   if (!result.success) {
@@ -28,12 +28,12 @@ export const create = (req: Request<{}, {}, Cidade>, res: Response) => {
       message: mensagens.length === 1 ? mensagens[0] : mensagens,
     });
   }
-  prisma.cidade.create({
+  await prisma.cidade.create({
     data: {
       nome: result.data.nome,
       estado: result.data.estado,
-    },    
- });
+    },
+  });
   return res.status(201).send({
     message: "Cidade e Estado criados com sucesso!",
   });
