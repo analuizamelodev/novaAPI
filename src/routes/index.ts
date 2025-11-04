@@ -26,6 +26,10 @@ const router = Router();
  *               nome:
  *                 type: string
  *                 example: Aracaju
+ *               estado:
+ *                 type: string
+ *                 example: SE
+
  *     responses:
  *       201:
  *         description: Cidade criada com sucesso
@@ -84,6 +88,8 @@ router.get("/cidades/:id", CidadeController.getById);
  *             type: object
  *             properties:
  *               nome:
+ *                 type: string
+ *               estado:
  *                 type: string
  *     responses:
  *       200:
