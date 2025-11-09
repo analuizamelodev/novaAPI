@@ -1,21 +1,18 @@
-import swaggerJSDoc, { Options } from "swagger-jsdoc";
+import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-const options: Options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Minha API TypeScript",
-      version: "1.0.0",
-      description: "Documentação da API feita com TypeScript e Swagger",
-    },
-    servers: [
-      {
-        url: "http://localhost:3000",
-      },
-    ],
+const swaggerDefinition = {
+  openapi: "3.0.0",
+  info: {
+    title: "API de Exemplo",
+    version: "1.0.0",
+    description: "Documentação da API com Swagger",
   },
-  apis: ["./src/routes/*.ts"], //
+};
+
+const options = {
+  swaggerDefinition,
+  apis: ["./src/routes/**/*.ts"], 
 };
 
 const swaggerSpec = swaggerJSDoc(options);

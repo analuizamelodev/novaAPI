@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { prisma } from "../../../server";
+import { prisma } from "../../server";
 
 interface Cidade {
   nome: string;

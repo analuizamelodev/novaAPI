@@ -1,5 +1,7 @@
 import { Router } from "express";
-import * as CidadeController from "./controllers/cidades";
+import * as CidadeController from "../controllers/cidades";
+import * as PessoaController from "../controllers/pessoas";
+``
 
 const router = Router();
 
@@ -118,5 +120,130 @@ router.put("/cidades/:id", CidadeController.updateById);
  *         description: Cidade não encontrada
  */
 router.delete("/cidades/:id", CidadeController.deleteById);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Pessoas
+ *   description: Gerenciamento de pessoas
+ */
+
+/**
+ * @swagger
+ * /pessoas:
+ *   post:
+ *     summary: Cria uma nova pessoa
+ *     tags: [Pessoas]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nomeCompleto:
+ *                 type: string
+ *                 example: Ana Luiza Santos
+ *               email:
+ *                 type: string
+ *                 example: ana.luiza@email.com
+ *               cidadeId:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       201:
+ *         description: Pessoa criada com sucesso
+ */
+router.post("/pessoas", PessoaController.create);
+
+/**
+ * @swagger
+ * /pessoas:
+ *   get:
+ *     summary: Lista todas as pessoas
+ *     tags: [Pessoas]
+ *     responses:
+ *       200:
+ *         description: Lista retornada com sucesso
+ */
+router.get("/pessoas", PessoaController.getAll);
+
+/**
+ * @swagger
+ * /pessoas/{id}:
+ *   get:
+ *     summary: Busca uma pessoa pelo ID
+ *     tags: [Pessoas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Pessoa encontrada
+ *       404:
+ *         description: Pessoa não encontrada
+ */
+router.get("/pessoas/:id", PessoaController.getById);
+
+/**
+ * @swagger
+ * /pessoas/{id}:
+ *   put:
+ *     summary: Atualiza uma pessoa
+ *     tags: [Pessoas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nomeCompleto:
+ *                 type: string
+ *                 example: Ana Luiza Santos
+ *               email:
+ *                 type: string
+ *                 example: ana.luiza@email.com
+ *               cidadeId:
+ *                 type: integer
+ *                 example: 1
+ *     responses:
+ *       200:
+ *         description: Pessoa atualizada com sucesso
+ *       404:
+ *         description: Pessoa não encontrada
+ */
+router.put("/pessoas/:id", PessoaController.updateById);
+
+/**
+ * @swagger
+ * /pessoas/{id}:
+ *   delete:
+ *     summary: Remove uma pessoa
+ *     tags: [Pessoas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       204:
+ *         description: Pessoa removida com sucesso
+ *       404:
+ *         description: Pessoa não encontrada
+ */
+router.delete("/pessoas/:id", PessoaController.deleteById);
+
+
 
 export { router };

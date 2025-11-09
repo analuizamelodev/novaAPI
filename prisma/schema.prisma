@@ -8,8 +8,17 @@ datasource db {
 }
 
 model Cidade {
-  id      Int    @id @default(autoincrement())
-  nome    String
-  estado  String
-  criadaEm DateTime @default(now())
+  id       Int       @id @default(autoincrement())
+  nome     String
+  estado   String
+  criadaEm DateTime  @default(now())
+  pessoas  Pessoas[]
+}
+
+model Pessoas {
+  id           Int    @id @default(autoincrement())
+  nomeCompleto String
+  email        String @unique
+  cidadeId     Int
+  cidade       Cidade @relation(fields: [cidadeId], references: [id])
 }

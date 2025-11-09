@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { z } from "zod";
-import { prisma } from "../../../server";
+import { prisma } from "../../server";
 
 interface IParamsProps {
   id: number;
@@ -10,7 +10,7 @@ const cidadeSchema = z.object({
   id: z.coerce.number().min(1, "O ID deve ser no mínimo 1."),
 });
 
-export const getById = async (
+export const deleteById = async (
   req: Request<{}, {}, IParamsProps>,
   res: Response
 ) => {
@@ -26,16 +26,13 @@ export const getById = async (
       message: mensagens.length === 1 ? mensagens[0] : mensagens,
     });
   }
-  const cidade = await prisma.cidade.findUnique({
+  await prisma.cidade.delete({
     where: {
       id: result.data.id,
     },
   });
 
   return res.status(200).json({
-    message: "Cidade e Estado encontrados com sucesso!",
-    data: {
-      cidade,
-    },
+    message: "Cidade e Estado deletados com sucesso!",
   });
 };
