@@ -7,18 +7,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cidade {
-  id       Int       @id @default(autoincrement())
-  nome     String
-  estado   String
-  criadaEm DateTime  @default(now())
-  pessoas  Pessoas[]
+model Usuario {
+  id           Int            @id @default(autoincrement())
+  nome         String         
+  email        String         @unique
+  senha        String
+
+  // Um usuário pode ter várias publicações e comentários
+  publicacoes  Publicacao[]   @relation("UsuarioPublicacoes")
+  comentarios  Comentario[]   @relation("UsuarioComentarios")
 }
 
-model Pessoas {
-  id           Int    @id @default(autoincrement())
-  nomeCompleto String
-  email        String @unique
-  cidadeId     Int
-  cidade       Cidade @relation(fields: [cidadeId], references: [id])
+model Publicacao {
+  id              Int           @id @default(autoincrement())
+  titulo          String
+  conteudo        String
+  dataCriacao     DateTime      @default(now())
+  dataAtualizacao DateTime      @updatedAt
+
+  // Cada publicação pertence a um usuário
+  autor           Usuario       @relation("UsuarioPublicacoes", fields: [autorId], references: [id])
+  autorId         Int
+
+  // Uma publicação pode ter vários comentários
+  comentarios     Comentario[]
+}
+
+model Comentario {
+  id          Int         @id @default(autoincrement())
+  conteudo    String
+  dataCriacao DateTime    @default(now())
+
+  // Cada comentário pertence a uma publicação
+  publicacao  Publicacao  @relation(fields: [publicacaoId], references: [id])
+  publicacaoId Int
+
+  // Cada comentário também pertence a um usuário (autor)
+  autor       Usuario     @relation("UsuarioComentarios", fields: [autorId], references: [id])
+  autorId     Int
 }
