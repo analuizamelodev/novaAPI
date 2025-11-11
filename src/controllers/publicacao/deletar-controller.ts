@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
-import { getUserFromToken } from "../../utils/getUserFromToken";
+import { getUserFromToken } from "../../utils/get-user-from-token";
 import { deletePublication } from "../../services/publicacao/delete-publication-service";
-import { prisma } from "../../server";
 
 export const deletarController = async (req: Request, res: Response) => {
   try {

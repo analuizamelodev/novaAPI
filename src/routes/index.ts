@@ -3,8 +3,9 @@ import { cadastroController } from "../controllers/autenticacao/cadastro-control
 import { loginController } from "../controllers/autenticacao/login-controller";
 import { publicarController } from "../controllers/publicacao/publicar-controller";
 import { deletarController } from "../controllers/publicacao/deletar-controller";
+import { buscarTodasPublicacoesController } from "../controllers/publicacao/buscar-todas-publicacoes-controller";
 
-``
+``;
 
 const router = Router();
 
@@ -41,7 +42,7 @@ const router = Router();
  *       201:
  *         description: Usuário cadastrado com sucesso
  */
-router.post("/autenticacao/cadastro",cadastroController);
+router.post("/autenticacao/cadastro", cadastroController);
 
 /**
  * @swagger
@@ -112,5 +113,37 @@ router.post("/publicacao/publicar", publicarController);
  *         description: Publicação não encontrada
  */
 router.delete("/publicacao/:id", deletarController);
+
+/**
+ * @swagger
+ * /publicacao:
+ *   get:
+ *     summary: Retorna todas as publicações
+ *     tags: [Publicação]
+ *     responses:
+ *       200:
+ *         description: Lista de publicações retornada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   titulo:
+ *                     type: string
+ *                     example: Meu primeiro post
+ *                   conteudo:
+ *                     type: string
+ *                     example: Este é o conteúdo da minha primeira publicação.
+ *                   criadoEm:
+ *                     type: string
+ *                     format: date-time
+ *                     example: 2025-11-11T10:00:00.000Z
+ */
+router.get("/publicacao", buscarTodasPublicacoesController);
 
 export { router };

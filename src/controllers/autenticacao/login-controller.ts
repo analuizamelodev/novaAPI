@@ -9,7 +9,10 @@ export const loginController = async (req: Request, res: Response) => {
   const usuario = await getUserByEmail(email);
 
   if (usuario && usuario.senha === senha) {
-    const token = jwt.sign({ email }, SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: usuario.id, email: usuario.email }, SECRET, {
+      expiresIn: "1h",
+    });
+
     return res.json({ token });
   }
 
