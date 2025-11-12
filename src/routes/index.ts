@@ -4,6 +4,7 @@ import { loginController } from "../controllers/autenticacao/login-controller";
 import { publicarController } from "../controllers/publicacao/publicar-controller";
 import { deletarController } from "../controllers/publicacao/deletar-controller";
 import { buscarTodasPublicacoesController } from "../controllers/publicacao/buscar-todas-publicacoes-controller";
+import { buscarPorIdController } from "../controllers/publicacao/buscar-por-id-controller";
 
 ``;
 
@@ -145,5 +146,44 @@ router.delete("/publicacao/:id", deletarController);
  *                     example: 2025-11-11T10:00:00.000Z
  */
 router.get("/publicacao", buscarTodasPublicacoesController);
+
+/**
+ * @swagger
+ * /publicacao/{id}:
+ *   get:
+ *     summary: Busca uma publicação pelo ID
+ *     tags: [Publicação]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID da publicação a ser buscada
+ *     responses:
+ *       200:
+ *         description: Publicação encontrada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 titulo:
+ *                   type: string
+ *                   example: Meu primeiro post
+ *                 conteudo:
+ *                   type: string
+ *                   example: Este é o conteúdo da minha primeira publicação.
+ *                 criadoEm:
+ *                   type: string
+ *                   format: date-time
+ *                   example: 2025-11-11T10:00:00.000Z
+ *       404:
+ *         description: Publicação não encontrada
+ */
+router.get("/publicacao/:id", buscarPorIdController);
 
 export { router };
