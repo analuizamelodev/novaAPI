@@ -4,7 +4,7 @@ import { getUserByEmail } from "../../services/usuario/get-user-by-email-service
 
 const SECRET = "minha_chave_super_secreta";
 
-export const loginController = async (req: Request, res: Response) => {
+export const logarUsuarioController = async (req: Request, res: Response) => {
   const { email, senha } = req.body;
   const usuario = await getUserByEmail(email);
 

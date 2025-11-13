@@ -1,12 +1,11 @@
 import { Router } from "express";
-import { cadastroController } from "../controllers/autenticacao/cadastro-controller";
-import { loginController } from "../controllers/autenticacao/login-controller";
+import { cadastrarUsuarioController } from "../controllers/autenticacao/cadastrar-usuario-controller";
+import { logarUsuarioController } from "../controllers/autenticacao/logar-usuario-controller";
 import { publicarController } from "../controllers/publicacao/publicar-controller";
 import { deletarController } from "../controllers/publicacao/deletar-controller";
 import { buscarTodasPublicacoesController } from "../controllers/publicacao/buscar-todas-publicacoes-controller";
-import { buscarPorIdController } from "../controllers/publicacao/buscar-por-id-controller";
-
-``;
+import { buscarPublicacaoPorIdController } from "../controllers/publicacao/buscar-publicacao-por-id-controller";
+import { atualizarPublicacaoPorIdController } from "../controllers/publicacao/atualizar-publicacao-por-id-controller";
 
 const router = Router();
 
@@ -43,7 +42,7 @@ const router = Router();
  *       201:
  *         description: Usuário cadastrado com sucesso
  */
-router.post("/autenticacao/cadastro", cadastroController);
+router.post("/autenticacao/cadastro", cadastrarUsuarioController);
 
 /**
  * @swagger
@@ -68,7 +67,7 @@ router.post("/autenticacao/cadastro", cadastroController);
  *       200:
  *         description: Login realizado com sucesso
  */
-router.post("/autenticacao/login", loginController);
+router.post("/autenticacao/login", logarUsuarioController);
 
 /**
  * @swagger
@@ -184,6 +183,43 @@ router.get("/publicacao", buscarTodasPublicacoesController);
  *       404:
  *         description: Publicação não encontrada
  */
-router.get("/publicacao/:id", buscarPorIdController);
+router.get("/publicacao/:id", buscarPublicacaoPorIdController);
+
+/**
+ * @swagger
+ * /publicacao/{id}:
+ *   put:
+ *     summary: Atualiza uma publicação existente
+ *     tags: [Publicação]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID da publicação que será atualizada
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               titulo:
+ *                 type: string
+ *                 example: Novo título da publicação
+ *               conteudo:
+ *                 type: string
+ *                 example: Novo conteúdo atualizado da publicação.
+ *     responses:
+ *       200:
+ *         description: Publicação atualizada com sucesso
+ *       404:
+ *         description: Publicação não encontrada
+ *       500:
+ *         description: Erro ao atualizar a publicação
+ */
+router.put("/publicacao/:id", atualizarPublicacaoPorIdController);
 
 export { router };
