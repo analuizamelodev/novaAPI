@@ -2,10 +2,14 @@ import { Router } from "express";
 import { cadastrarUsuarioController } from "../controllers/autenticacao/cadastrar-usuario-controller";
 import { logarUsuarioController } from "../controllers/autenticacao/logar-usuario-controller";
 import { publicarController } from "../controllers/publicacao/publicar-controller";
-import { deletarController } from "../controllers/publicacao/deletar-controller";
+import { deletarPublicacaoPorIdController } from "../controllers/publicacao/deletar-publicacao-por-id-controller";
 import { buscarTodasPublicacoesController } from "../controllers/publicacao/buscar-todas-publicacoes-controller";
 import { buscarPublicacaoPorIdController } from "../controllers/publicacao/buscar-publicacao-por-id-controller";
 import { atualizarPublicacaoPorIdController } from "../controllers/publicacao/atualizar-publicacao-por-id-controller";
+import { comentarController } from "../controllers/comentario/comentar-controller";
+import { buscarTodosComentariosController } from "../controllers/comentario/buscar-todos-comentarios-controller";
+import { buscarComentarioPorIdController } from "../controllers/comentario/buscar-comentario-por-id-controller";
+import { deletarComentarioPorIdController } from "../controllers/comentario/deletar-comentario-por-id-controller";
 
 const router = Router();
 
@@ -71,6 +75,12 @@ router.post("/autenticacao/login", logarUsuarioController);
 
 /**
  * @swagger
+ * tags:
+ *   name: Publicação
+ *   description: Endpoints de publicação
+ */
+/**
+ * @swagger
  * /publicacao/publicar:
  *   post:
  *     summary: Postar uma nova publicação
@@ -112,7 +122,7 @@ router.post("/publicacao/publicar", publicarController);
  *       404:
  *         description: Publicação não encontrada
  */
-router.delete("/publicacao/:id", deletarController);
+router.delete("/publicacao/:id", deletarPublicacaoPorIdController);
 
 /**
  * @swagger
@@ -221,5 +231,140 @@ router.get("/publicacao/:id", buscarPublicacaoPorIdController);
  *         description: Erro ao atualizar a publicação
  */
 router.put("/publicacao/:id", atualizarPublicacaoPorIdController);
+
+/**
+ * @swagger
+ * tags:
+ *   name: Comentário
+ *   description: Endpoints relacionados aos comentários
+ */
+
+/**
+ * @swagger
+ * /comentario:
+ *   post:
+ *     summary: Adicionar um novo comentário
+ *     tags: [Comentário]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               publicacaoId:
+ *                 type: integer
+ *                 example: 1
+ *               usuarioId:
+ *                 type: integer
+ *                 example: 42
+ *               conteudo:
+ *                 type: string
+ *                 example: "Esse post está incrível!"
+ *     responses:
+ *       201:
+ *         description: Comentário criado com sucesso
+ */
+router.post("/comentario", comentarController);
+
+/**
+ * @swagger
+ * /comentario:
+ *   get:
+ *     summary: Retorna todos os comentários
+ *     tags: [Comentário]
+ *     responses:
+ *       200:
+ *         description: Lista de comentários retornada com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                     example: 1
+ *                   conteudo:
+ *                     type: string
+ *                     example: "Comentário de exemplo"
+ *                   usuarioId:
+ *                     type: integer
+ *                     example: 42
+ *                   publicacaoId:
+ *                     type: integer
+ *                     example: 10
+ *                   criadoEm:
+ *                     type: string
+ *                     format: date-time
+ *                     example: 2025-11-11T10:00:00.000Z
+ */
+router.get("/comentario", buscarTodosComentariosController);
+
+/**
+ * @swagger
+ * /comentario/{id}:
+ *   get:
+ *     summary: Busca um comentário pelo ID
+ *     tags: [Comentário]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do comentário a ser buscado
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *     responses:
+ *       200:
+ *         description: Comentário encontrado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 conteudo:
+ *                   type: string
+ *                   example: "Comentário encontrado com sucesso"
+ *                 usuarioId:
+ *                   type: integer
+ *                   example: 42
+ *                 publicacaoId:
+ *                   type: integer
+ *                   example: 10
+ *                 criadoEm:
+ *                   type: string
+ *                   format: date-time
+ *                   example: 2025-11-11T10:00:00.000Z
+ *       404:
+ *         description: Comentário não encontrado
+ */
+router.get("/comentario/:id", buscarComentarioPorIdController);
+
+/**
+ * @swagger
+ * /comentario/{id}:
+ *   delete:
+ *     summary: Remove um comentário pelo ID
+ *     tags: [Comentário]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do comentário a ser removido
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *     responses:
+ *       204:
+ *         description: Comentário removido com sucesso
+ *       404:
+ *         description: Comentário não encontrado
+ */
+router.delete("/comentario/:id", deletarComentarioPorIdController);
 
 export { router };

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { getUserFromToken } from "../../utils/get-user-from-token";
-import { deletePublication } from "../../services/publicacao/delete-publication-service";
+import { deleteByIdPublication } from "../../services/publicacao/delete-by-id-publication-service";
 
-export const deletarController = async (req: Request, res: Response) => {
+export const deletarPublicacaoPorIdController = async (req: Request, res: Response) => {
   try {
     const { valid, error, usuario } = getUserFromToken(req);
 
@@ -12,7 +12,7 @@ export const deletarController = async (req: Request, res: Response) => {
 
     const { id } = req.params;
 
-    const deletar = await deletePublication(Number(id));
+    const deletar = await deleteByIdPublication(Number(id));
 
     return res.status(200).json({
       message: "Publicação deletada com sucesso.",
