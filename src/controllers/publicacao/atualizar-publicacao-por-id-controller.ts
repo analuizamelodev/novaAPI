@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { updateByIdPublication } from "../../services/publicacao/update-by-id-publication-service";
 import { getUserFromToken } from "../../utils/get-user-from-token";
 
-export const atualizarPublicacaoPorIdController = async (req: Request, res: Response) => {
+export const atualizarPublicacaoPorIdController = async (
+  req: Request,
+  res: Response
+) => {
   const { valid, error, usuario } = getUserFromToken(req);
   if (!valid || !usuario) {
     return res

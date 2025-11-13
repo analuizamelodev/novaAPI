@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 import { getUserFromToken } from "../../utils/get-user-from-token";
 import { deleteByIdPublication } from "../../services/publicacao/delete-by-id-publication-service";
 
-export const deletarPublicacaoPorIdController = async (req: Request, res: Response) => {
+export const deletarPublicacaoPorIdController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const { valid, error, usuario } = getUserFromToken(req);
 

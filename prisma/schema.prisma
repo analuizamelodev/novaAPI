@@ -8,41 +8,41 @@ datasource db {
 }
 
 model Usuario {
-  id           Int            @id @default(autoincrement())
-  nome         String         
-  email        String         @unique
-  senha        String
+  id    Int    @id @default(autoincrement())
+  nome  String
+  email String @unique
+  senha String
 
   // Um usuário pode ter várias publicações e comentários
-  publicacoes  Publicacao[]   @relation("UsuarioPublicacoes")
-  comentarios  Comentario[]   @relation("UsuarioComentarios")
+  publicacoes Publicacao[] @relation("UsuarioPublicacoes")
+  comentarios Comentario[] @relation("UsuarioComentarios")
 }
 
 model Publicacao {
-  id              Int           @id @default(autoincrement())
+  id              Int      @id @default(autoincrement())
   titulo          String
   conteudo        String
-  dataCriacao     DateTime      @default(now())
-  dataAtualizacao DateTime      @updatedAt
+  dataCriacao     DateTime @default(now())
+  dataAtualizacao DateTime @updatedAt
 
   // Cada publicação pertence a um usuário
-  autor           Usuario       @relation("UsuarioPublicacoes", fields: [autorId], references: [id])
-  autorId         Int
+  autor   Usuario @relation("UsuarioPublicacoes", fields: [autorId], references: [id])
+  autorId Int
 
   // Uma publicação pode ter vários comentários
-  comentarios     Comentario[]
+  comentarios Comentario[]
 }
 
 model Comentario {
-  id          Int         @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   conteudo    String
-  dataCriacao DateTime    @default(now())
+  dataCriacao DateTime @default(now())
 
   // Cada comentário pertence a uma publicação
-  publicacao  Publicacao  @relation(fields: [publicacaoId], references: [id])
+  publicacao   Publicacao @relation(fields: [publicacaoId], references: [id])
   publicacaoId Int
 
   // Cada comentário também pertence a um usuário (autor)
-  autor       Usuario     @relation("UsuarioComentarios", fields: [autorId], references: [id])
-  autorId     Int
+  autor   Usuario @relation("UsuarioComentarios", fields: [autorId], references: [id])
+  autorId Int
 }

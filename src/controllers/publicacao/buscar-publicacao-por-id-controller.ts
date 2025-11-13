@@ -1,7 +1,10 @@
-import  { Request, Response } from "express";
+import { Request, Response } from "express";
 import { getByIdPublication } from "../../services/publicacao/get-by-id-publication-service";
 
-export const buscarPublicacaoPorIdController = async (req: Request, res: Response) => {
+export const buscarPublicacaoPorIdController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const publicacao = await getByIdPublication(Number(req.params.id));
     return res.status(200).json(publicacao);
