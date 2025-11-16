@@ -81,7 +81,7 @@ router.post("/autenticacao/login", logarUsuarioController);
  */
 /**
  * @swagger
- * /publicacao/publicar:
+ * /publicacaor:
  *   post:
  *     summary: Postar uma nova publicação
  *     tags: [Publicação]
@@ -102,7 +102,7 @@ router.post("/autenticacao/login", logarUsuarioController);
  *       201:
  *         description: Publicação criada com sucesso
  */
-router.post("/publicacao/publicar", publicarController);
+router.post("/publicacao", publicarController);
 
 /**
  * @swagger
