@@ -4,7 +4,7 @@ import swaggerUi from "swagger-ui-express";
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "API de Exemplo",
+    title: "Blog API",
     version: "1.0.0",
     description: "Documentação da API com Swagger",
   },
