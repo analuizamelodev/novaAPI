@@ -32,9 +32,6 @@ CREATE TABLE "Comentario" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Usuario_nome_key" ON "Usuario"("nome");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Usuario_email_key" ON "Usuario"("email");
 
 -- AddForeignKey
